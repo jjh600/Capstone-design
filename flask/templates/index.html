@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>    
+		<title>동작감지 기반 객체 인식 및 검색 시스템</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+        <link href="https://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='css/images/icon.png') }}" />
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='css/images/icon.png') }}" />
+        
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+	</head>
+	<body class="is-preload">
+        <nav class="login_bar">
+            {% if confirm == False %}
+               <a style="padding-right: 10px" href="/login">관리자 로그인</a>
+            {% else %}
+                <a style="padding-right: 10px" href="/logout">로그아웃</a>
+            {% endif %}
+            </nav>
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">동작감지 기반 객체 인식 및 검색 시스템</a></li>
+							<li><a href="#one">실시간 스트리밍</a></li>
+							<li><a href="#two">검색</a></li>
+                            <li class="ll">
+                                {% if confirm == False %}
+               <a  href="/login">관리자 로그인</a>
+            {% else %}
+                <a  href="/logout">로그아웃</a>
+            {% endif %}
+                            </li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1 >동작감지 기반 객체 인식 및 <br class="ent">검색 시스템</h1>
+							<p>딥러닝으로 학습된 객체 인식 모델을 통해 동작이 감지되었을때만 <br>영상을 저장하여 원하는 시간이나 객체별로 검색하실 수 있습니다.</p>
+                            <p>시설안전․화재예방 및 도난사고예방 등의 안전 관리와, <br>출입통제 등의 보안 관리에 사용되는 모든 실시간 CCTV에 활용될 수 있습니다.</p>
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">확인하러 가기</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 fullscreen fade-up">
+						<section>
+							<div class="inner hd">
+								<h1 style="text-align: center;">실시간 CCTV</h1>
+							</div>
+						</section>
+						<section>
+								<div id="rl" class="inner">
+									<div class="vd">
+										<p>CAM1</p>
+                                        <iframe class="vs"  src="https://rtsp.me/embed/8z6QDR3b/" frameborder="0" allowfullscreen></iframe>
+									</div>
+									<div class="vd">
+										<p>CAM2</p>
+                                        <video class="vs" src="" autoplay></video>
+{#                                        <iframe class="vs"  src="https://rtsp.me/embed/8z6QDR3b/" frameborder="0" allowfullscreen></iframe>#}
+									</div>
+								</div>
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fullscreen fade-up">
+						<div class="inner">
+							<div class="sd">
+								<input id='inp' type='text' class='input_text' placeholder="날짜나 물체를 입력하세요. ex) person, dog, 7분"/>
+								<button id='sea' type='submit' class='sch_smit'>검색</button>
+							</div>
+
+							<div class="ld">
+								<article>
+									<div class="content">
+										<div class="inner">
+											<h2 class="pb">검색 결과</h2>
+											<ul id="testUl">
+											</ul>
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</section>
+					
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+     <script type="text/javascript">
+
+             var constraints = {audio: false, video: {width: 1280, height: 720}};
+
+             navigator.mediaDevices.getUserMedia(constraints)
+                 .then(function (stream) {
+                     var video = document.querySelector('video');
+                     // Older browsers may not have srcObject
+                     if ("srcObject" in video) {
+                         video.srcObject = stream;
+                     } else {
+                         // Avoid using this in new browsers, as it is going away.
+                         video.src = window.URL.createObjectURL(stream);
+                     }
+                     video.onloadedmetadata = function (e) {
+                         video.play();
+                     };
+                 })
+                 .catch(function (err) {
+                     console.log(err.name + ": " + err.message);
+                 });
+
+    </script>
+
+    <script type=text/javascript>
+
+        $(document).ready(function () {
+            $("#testUl").on("click", "li", function () {
+                location.href='/profile/'+$(this).attr('title');
+
+            });
+
+            $("#sea").on("click", function () {
+                if ($("#inp").val() != ""){
+                    $("#testUl").empty();
+                    $.ajax({
+                    url : '/search',
+                    type : 'POST',
+                    data : { name : $("#inp").val()},
+                    dataType : 'json',
+                    success : function (data) {
+                        var flist = data['data']
+
+                        var i =0;
+
+                        run = setInterval(function(){
+                            if(i==flist.length){
+                               clearInterval(run);
+                            }else{
+                                $("<li class='fli' title \= \"" +flist[i][0] + "\">" + flist[i][1] + "</li>").appendTo("#testUl").hide().slideDown();
+                               i++;
+                               location.href='#two'
+                            }
+                        },120);
+                    }
+                })
+                } else {
+                    alert('검색어를 입력해주세요.')
+                }
+
+
+            });
+
+        });
+
+        // 해쉬가 있는 모든 링크
+  $('a[href*="#"]')
+  // 아무것도 연결하지 않는 링크 삭제
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // 페이지 링크
+    if ( location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname ) {
+      // 스크롤 할 요소를 찾는다.
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // 스크롤 대상인지 체크
+      if (target.length) {
+        // 애니메이션이 발생할 경우에만 이벤트 방지
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000, function() {
+          // 애니메이션이 끝난 후
+          // 포커스 변경
+          var $target = $(target);
+          $target.focus();
+          if ($target.is(":focus")) { // 타켓이 포커스 되어 있는지 체크
+            return false;
+          } else {
+            $target.attr('tabindex','-1'); // 포커스가 없는 요소에 tabindex 추가
+            $target.focus();
+          }
+        });
+      }
+    }
+  });
+
+    </script>
+	</body>
+</html>
