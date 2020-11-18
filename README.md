@@ -1,5 +1,5 @@
 # 동작감지 기반 객체 인식 및 검색 시스템
-YOLOv4를 사용해 객체가 인식될때만 영상을 저장하여 시간, 객체 이름으로 검색 가능한 시스템
+YOLOv4를 사용해 객체가 인식될때만 영상을 저장하여 시간, 객체 이름으로 검색 가능한 시스템  
 https://object-detection-ljj.herokuapp.com/
 
 # screenshots
