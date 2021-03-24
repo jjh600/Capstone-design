@@ -16,6 +16,15 @@ https://object-detection-ljj.herokuapp.com/
 # 시스템 구성도
 ![시스템 구성도](https://user-images.githubusercontent.com/66826815/112254950-be4a5600-8ca4-11eb-902c-6c20a488616e.PNG)
 
+# 개발 환경 및 도구
+|작품 관련 기술|내용|
+|---|---|
+|YOLOv4|효율적인 저장을 하려면 객체 인식을 통한 영상의 분류가 필요했고, 이에 적합한 기술로 실시간 객체 인식이 가능한 YOLO를 선택.|
+|MongoDB|분류된 영상을 저장하기 위해 GridFS로 파일 저장이 가능한 MongoDB가 적합.|
+|Flask|실시간 스트리밍, 영상 검색 기능 등 사용자를 위한 UI 구성을 위해 Flask 사용.|
+|RTSP|웹캠의 영상을 실시간으로 가져오기 위해 RTSP 사용.|
+|Python 3.8|머신러닝관련 다양한 라이브러리를 지원하는 언어인 python 사용.|
+
 # 해결방안 및 수행과정
 *1. 실시간 객체 인식*
 - real-time object detection system인 YOLO를 이용하여 실시간으로 웹 캠을 통해 객체를 인식. 
